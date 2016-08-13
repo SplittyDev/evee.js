@@ -83,4 +83,18 @@ var evee = () => {
   // Return evee object
   return evee;
 };
-module.exports = evee;
+class Evee {
+  /**
+   * Construct a new Evee object.
+   */
+  constructor() {
+    ((evee) => {
+      var evee = evee();
+      this.subscribe = evee.subscribe;
+      this.unsubscribe = evee.unsubscribe;
+      this.dispatch = evee.dispatch;
+      this.clear = evee.clear;
+    })(evee);
+  }
+}
+module.exports = Evee;
