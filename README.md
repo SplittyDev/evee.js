@@ -49,7 +49,7 @@ var Evee = require('evee'),
 evee.once('say', e => console.log('hello, world'));
 
 // Dispatch the 'say' event two times
-evee.signal('say', 'say');
+evee.times('say', 2);
 
 // hello, world is only printed once!
 ```

@@ -166,7 +166,7 @@ describe('evee', () => {
       assert.equal(true, resa);
       assert.equal(true, resb);
     });
-    it('should correctly dispatch the same event multiple times', () => {
+    it('should correctly dispatch the same event multiple multiple', () => {
       let evee = new Evee();
       let res = false;
       evee.on('a', _ => res = !res);
@@ -199,6 +199,13 @@ describe('evee', () => {
       evee.on('a', e => res = e.data);
       evee.times('a', 3, () => !res);
       assert.equal(true, res);
+    });
+    it('should work correctly without a callback', () => {
+      let evee = new Evee();
+      let res = false;
+      evee.on('a', e => res = e.hasData() ? e.data : res);
+      evee.times('a', 3);
+      assert.equal(false, res);
     });
     it('should throw if n is not a number', () => {
       let evee = new Evee();

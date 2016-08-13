@@ -143,12 +143,12 @@ let evee = () => {
     if (typeof(n) !== 'number') {
       throw new TypeError('n has to be of type number.');
     }
-    if (typeof(callback) !== 'function') {
+    if (callback !== undefined && typeof(callback) !== 'function') {
       throw new TypeError('callback has to be of type function.');
     }
     let arr = Array(n);
     for (let i of arr.keys()) {
-      emit(name, callback(i));
+      emit(name, callback === undefined ? undefined : callback(i));
     }
   }
 
