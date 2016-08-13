@@ -24,19 +24,19 @@ describe('evee', () => {
       assert.throws(() => evee.unsubscribe(0));
     });
   });
-  describe('#dispatch(name, data)', () => {
+  describe('#emit(name, data)', () => {
     it('should not dispatch when the event name matches no receivers', () => {
       var evee = new Evee();
       var res = false;
       evee.on('a', _ => res = true);
-      evee.dispatch('b');
+      evee.emit('b');
       assert.equal(false, res);
     });
     it('should dispatch when the event name matches a receiver', () => {
       var evee = new Evee();
       var res = false;
       evee.on('a', _ => res = true);
-      evee.dispatch('a');
+      evee.emit('a');
       assert.equal(true, res);
     });
     it('should dispatch when the event name matches multiple receivers', () => {
@@ -44,7 +44,7 @@ describe('evee', () => {
       var res = 0;
       evee.on('a', _ => ++res);
       evee.on('a', _ => ++res);
-      evee.dispatch('a');
+      evee.emit('a');
       assert.equal(2, res);
     });
     it('should transmit the correct event data when dispatching', () => {
@@ -52,19 +52,17 @@ describe('evee', () => {
       var res = 0;
       evee.on('a', e => res += e.data);
       evee.on('b', e => res += e.data);
-      evee.dispatch('a', 11);
-      evee.dispatch('b', 11);
+      evee.emit('a', 11);
+      evee.emit('b', 11);
       assert.equal(22, res);
     });
     it('should transmit the correct sender when dispatching', () => {
       var evee = new Evee();
       var res = false;
       var sender = evee.on('a', e => res = e.sender === sender);
-      evee.dispatch('a');
+      evee.emit('a');
       assert.equal(true, res);
     });
-  });
-  describe('#emit(name, data)', () => {
     it('should work exactly like dispatch', () => {
       var evee = new Evee();
       var res = false;
@@ -120,7 +118,7 @@ describe('evee', () => {
       var res = false;
       evee.on('a', _ => res = true);
       evee.clear();
-      evee.dispatch('a');
+      evee.signal('a');
       assert.equal(false, res);
     });
   });
