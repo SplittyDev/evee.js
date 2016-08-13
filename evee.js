@@ -1,29 +1,29 @@
 // evee.js - The lightweight es6 event library.
-class Eveent {
-  /**
-   * Construct a new Eveent object.
-   * @param {object} name - The name of the event
-   * @param {function} action - The event action
-   * @param {number} id - The event identifier
-   */
-  constructor(name, action, id) {
-    this.name = name;
-    this.action = action;
-    this.id = id;
-  }
-}
-class EveentData {
-  /**
-   * Construct a new EveentData object.
-   * @param {Eveent} sender - The event object
-   * @param {object} data - The event data
-   */
-  constructor(sender, data) {
-    this.sender = sender;
-    this.data = data;
-  }
-}
 var evee = () => {
+  class Eveent {
+    /**
+     * Construct a new Eveent object.
+     * @param {object} name - The name of the event
+     * @param {function} action - The event action
+     * @param {number} id - The event identifier
+     */
+    constructor(name, action, id) {
+      this.name = name;
+      this.action = action;
+      this.id = id;
+    }
+  }
+  class EveentData {
+    /**
+     * Construct a new EveentData object.
+     * @param {Eveent} sender - The event object
+     * @param {object} data - The event data
+     */
+    constructor(sender, data) {
+      this.sender = sender;
+      this.data = data;
+    }
+  }
   // Prepare local globals
   var evee = {};
   var receivers = [];
