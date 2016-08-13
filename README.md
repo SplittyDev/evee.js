@@ -22,7 +22,7 @@ while(true) {
 ```
 
 As you can see, evee is really easy to use!   
-Start using evee today and start firing events at nearly the speed of light<sup>1</sup> :)
+Start using evee today and fire events at nearly the speed of light<sup>1</sup> :)
 
 
 <sup>1</sup> <sub>This is probably not true, but who knows.</sub>
