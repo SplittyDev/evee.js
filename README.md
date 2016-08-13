@@ -1,4 +1,6 @@
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/SplittyDev/evee.js/master/LICENSE.md)
 [![npm](https://img.shields.io/npm/v/evee.svg?maxAge=2592000&style=flat-square)]()
+[![Travis](https://img.shields.io/travis/SplittyDev/evee.js.svg?maxAge=2592000&style=flat-square)]()
 
 # evee.js
 The blazing fast es6 event library.
