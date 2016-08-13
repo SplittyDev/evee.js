@@ -36,7 +36,7 @@ var receiver = evee.on('say', e => console.log(e.data));
 evee.emit('say', 'Hello, world!');
 
 // Unsubscribe from the 'say' event
-evee.unsubscribe(receiver);
+evee.drop(receiver);
 ```
 
 Here's a nice pattern to write one-shot events:
