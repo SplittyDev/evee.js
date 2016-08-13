@@ -68,17 +68,17 @@ var evee = () => {
    */
   var once = (name, action) => {
     subscribe(name, e => {
-      unsubscribe(e.sender);
+      drop(e.sender);
       action(e);
     });
   }
 
   /**
-   * Unsubscribe from an event.
+   * Drop an event.
    * @param {Eveent} event - The event
-   * @returns {boolean} - Whether the subscription has been removed
+   * @returns {boolean} - Whether the event has been dropped
    */
-  var unsubscribe = event => {
+  var drop = event => {
     if (!(event instanceof Eveent)) {
       throw new TypeError('event has to be an instance of Eveent.');
     }
@@ -140,8 +140,8 @@ var evee = () => {
   evee.on = on;
   evee.once = once;
   evee.emit = emit;
+  evee.drop = drop;
   evee.signal = signal;
-  evee.unsubscribe = unsubscribe;
   evee.clear = clear;
 
   // Return evee object
@@ -159,9 +159,9 @@ class Evee {
       var evee = evee();
       this.on = evee.on;
       this.once = evee.once;
+      this.drop = evee.drop;
       this.emit = evee.emit;
       this.signal = evee.signal;
-      this.unsubscribe = evee.unsubscribe;
       this.clear = evee.clear;
     })(evee);
   }

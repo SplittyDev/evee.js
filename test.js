@@ -13,15 +13,24 @@ describe('evee', () => {
       assert.throws(() => evee.on('a', null));
     });
   });
-  describe('#unsubscribe(event)', () => {
+  describe('#once(name, action)', () => {
+    it('should only dispatch once', () => {
+      var evee = new Evee();
+      var res = false;
+      evee.once('a', _ => res = !res);
+      evee.signal('a', 'a');
+      assert.equal(true, res);
+    });
+  });
+  describe('#drop(event)', () => {
     it('should return true when subscriptions were removed', () => {
       var evee = new Evee();
       var ev = evee.on('a', _ => null);
-      assert.equal(true, evee.unsubscribe(ev));
+      assert.equal(true, evee.drop(ev));
     });
     it('should throw when the argument is not an event object', () => {
       var evee = new Evee();
-      assert.throws(() => evee.unsubscribe(0));
+      assert.throws(() => evee.drop(0));
     });
   });
   describe('#emit(name, data)', () => {
@@ -101,15 +110,6 @@ describe('evee', () => {
       evee.signal('a', 'b');
       assert.equal(true, resa);
       assert.equal(true, resb);
-    });
-  });
-  describe('#once(name, action)', () => {
-    it('should only dispatch once', () => {
-      var evee = new Evee();
-      var res = false;
-      evee.once('a', _ => res = !res);
-      evee.signal('a', 'a');
-      assert.equal(true, res);
     });
   });
   describe('#clear()', () => {
