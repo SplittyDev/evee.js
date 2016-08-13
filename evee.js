@@ -43,7 +43,10 @@ var evee = () => {
    * @returns {Eveent} - The event object
    */
   var subscribe = (name, action) => {
-    if (typeof (action) !== 'function') {
+    if (typeof(name) !== 'string') {
+      throw new TypeError('name has to be of type string.');
+    }
+    if (typeof(action) !== 'function') {
       throw new TypeError('action has to be of type function.');
     }
     var ev = new Eveent(name, action, gid++);
@@ -56,9 +59,7 @@ var evee = () => {
    * @param {object} name - The event name
    * @param {function} action - The event action
    */
-  var on = (name, action) => {
-    subscribe(name, action);
-  };
+  var on = (name, action) => subscribe(name, action);
 
   /**
    * Subscribe to an event and fire only once.
@@ -79,7 +80,7 @@ var evee = () => {
    */
   var unsubscribe = event => {
     if (!(event instanceof Eveent)) {
-      throw new TypeError("event has to be an instance of Eveent.");
+      throw new TypeError('event has to be an instance of Eveent.');
     }
     var result = false;
     receivers.every((item, index, arr) => {
@@ -95,12 +96,33 @@ var evee = () => {
   /**
    * Dispatch an event.
    * @param {string} name - The name of the event
-   * @param {object} e - The event data
+   * @param {object=} data - The event data
    */
-  var dispatch = (name, e) => {
+  var dispatch = (name, data) => {
     receivers
       .filter(item => name === item.name)
-      .forEach(item => item.action(new EveentData(item, e)));
+      .forEach(item => item.action(new EveentData(item, data)));
+  };
+
+  /**
+   * Emit an event.
+   * @param {string|array} name - The name/s of the event
+   * @param {object=} data - The event data
+   */
+  var emit = (name, data) => {
+    if (name.constructor === Array) {
+      name.forEach(item => dispatch(item, data));
+    } else {
+      dispatch(name, data);
+    }
+  };
+
+  /**
+   * Signal an event.
+   * @param {array} args - The names of the events
+   */
+  var signal = (...args) => {
+    args.forEach(item => dispatch(item));
   };
 
   /**
@@ -108,15 +130,15 @@ var evee = () => {
    */
   var clear = () => receivers.length = 0;
 
-  // Core functionality
+  // Make functions available
+  evee.on = on;
+  evee.once = once;
+  evee.emit = emit;
+  evee.signal = signal;
   evee.subscribe = subscribe;
   evee.unsubscribe = unsubscribe;
   evee.dispatch = dispatch;
   evee.clear = clear;
-
-  // Additional functionality
-  evee.on = on;
-  evee.once = once;
 
   // Return evee object
   return evee;
@@ -131,16 +153,14 @@ class Evee {
   constructor(extensions) {
     ((evee) => {
       var evee = evee();
-
-      // Core functionality
+      this.on = evee.on;
+      this.once = evee.once;
+      this.emit = evee.emit;
+      this.signal = evee.signal;
       this.subscribe = evee.subscribe;
       this.unsubscribe = evee.unsubscribe;
       this.dispatch = evee.dispatch;
       this.clear = evee.clear;
-
-      // Additional functionality
-      this.on = evee.on;
-      this.once = evee.once;
     })(evee);
   }
 }

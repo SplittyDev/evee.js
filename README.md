@@ -12,10 +12,7 @@ var Evee = require('evee'),
     evee = new Evee();
 
 // Subscribe to the 'update' event
-// Hint: 'on' is synonym for 'subscribe'
-evee.on('update', e => {
-  console.log('Ticks: ' + e.data);
-});
+evee.on('update', e => console.log(`Ticks: ${e.data}`));
 
 var ticks = 0;
 while(true) {
@@ -33,8 +30,7 @@ var Evee = require('evee'),
     evee = new Evee();
 
 // Subscribe to the 'say' event
-// Hint: 'subscribe' is synonym for 'on'
-var receiver = evee.subscribe('say', e => console.log(e.data));
+var receiver = evee.on('say', e => console.log(e.data));
 
 // Dispatch the 'say' event
 evee.dispatch('say', 'Hello, world!');
