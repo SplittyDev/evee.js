@@ -1,3 +1,5 @@
+[![npm](https://img.shields.io/npm/v/evee.svg?maxAge=2592000?style=flat-square)]()
+
 # evee.js
 The lightweight es6 event library.
 
