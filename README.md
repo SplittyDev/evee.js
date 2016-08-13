@@ -1,9 +1,9 @@
 [![npm](https://img.shields.io/npm/v/evee.svg?maxAge=2592000?style=flat-square)]()
 
 # evee.js
-The lightweight es6 event library.
+The blazing fast es6 event library.
 
-Evee is a beautiful, lightweight event library, written in clean JavaScript (ES6).
+Evee is a lightweight event library, written in clean ECMAScript6.
 
 ## How to use
 ```js
@@ -51,9 +51,10 @@ var Evee = require('evee'),
 
 // Subscribe to the 'oneShot' event
 evee.subscribe('oneShot', e => {
+
     // Print hello, world
     console.log('hello, world');
-    
+
     // Unsubscribe
     evee.unsubscribe(e.sender);
 });
@@ -62,7 +63,7 @@ evee.subscribe('oneShot', e => {
 evee.dispatch('oneShot');
 evee.dispatch('oneShot');
 
-// hello, world is only printed ocne!
+// hello, world is only printed once!
 ```
 
 As you can see, evee is really easy to use!   
