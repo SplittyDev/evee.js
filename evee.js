@@ -29,6 +29,10 @@ let evee = () => {
       this.sender = sender;
       this.data = data;
     }
+
+    hasData() {
+      return this.data !== undefined;
+    }
   }
 
   // Prepare local globals
@@ -130,12 +134,31 @@ let evee = () => {
   };
 
   /**
+   * Emit an event n times.
+   * @param {string} name - The event name
+   * @param {number} n - The number of times the event should be dispatched
+   * @param {function=} callback - The callback
+   */
+  let times = (name, n, callback) => {
+    if (typeof(n) !== 'number') {
+      throw new TypeError('n has to be of type number.');
+    }
+    if (typeof(callback) !== 'function') {
+      throw new TypeError('callback has to be of type function.');
+    }
+    let arr = Array(n);
+    for (let i of arr.keys()) {
+      emit(name, callback(i));
+    }
+  }
+
+  /**
    * Signal an event.
    * @param {array} args - The names of the events
    */
   let signal = (...args) => {
     if (args.length === 0) {
-      throw new Error('signal called without arguments');
+      throw new Error('signal called without arguments.');
     }
     args.forEach(item => dispatch(item));
   };
@@ -150,8 +173,9 @@ let evee = () => {
   evee.once = once;
   evee.emit = emit;
   evee.drop = drop;
-  evee.signal = signal;
+  evee.times = times;
   evee.clear = clear;
+  evee.signal = signal;
 
   // Return evee object
   return evee;
