@@ -5,8 +5,8 @@ Evee is a beautiful, lightweight event library, written in clean JavaScript (ES6
 
 ## How to use
 ```js
-// Get evee
-var evee = require('./evee')();
+// Grab a new evee instance
+var evee = new require('./evee');
 
 // Subscribe to the 'onUpdate' event
 evee.subscribe('onUpdate', e => {
@@ -19,6 +19,24 @@ while(true) {
   // Dispatch the 'onUpdate' event
   evee.dispatch('onUpdate', ++ticks);
 }
+```
+
+You can also keep track of your event listeners   
+and even unsubscribe from events! :)
+```js
+// Grab a new evee instance
+var evee = new require('./evee');
+
+// Subscribe to the 'onSomething' event
+var receiver = evee.subscribe('onSomething', e => {
+  console.log(e.data);
+});
+
+// Dispatch the 'onSomething' event
+evee.dispatch('onSomething', 'Hello, world!');
+
+// Unsubscribe from the 'onSomething' event
+evee.unsubscribe(receiver);
 ```
 
 As you can see, evee is really easy to use!   
