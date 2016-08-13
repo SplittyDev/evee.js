@@ -2,7 +2,5 @@ language: node_js
 node_js:
   - "node"
   - "6"
-  - "5"
-  - "4.4"
-install: npm install mocha
+install: npm install --only=dev
 script: npm test
