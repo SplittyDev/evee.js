@@ -11,16 +11,17 @@ Evee is a lightweight event library, written in clean ECMAScript6.
 var Evee = require('evee'),
     evee = new Evee();
 
-// Subscribe to the 'onUpdate' event
-evee.subscribe('onUpdate', e => {
+// Subscribe to the 'update' event
+// Hint: 'on' is synonym for 'subscribe'
+evee.on('update', e => {
   console.log('Ticks: ' + e.data);
 });
 
 var ticks = 0;
 while(true) {
 
-  // Dispatch the 'onUpdate' event
-  evee.dispatch('onUpdate', ++ticks);
+  // Dispatch the 'update' event
+  evee.dispatch('update', ++ticks);
 }
 ```
 
@@ -31,15 +32,14 @@ and even unsubscribe from events! :)
 var Evee = require('evee'),
     evee = new Evee();
 
-// Subscribe to the 'onSomething' event
-var receiver = evee.subscribe('onSomething', e => {
-  console.log(e.data);
-});
+// Subscribe to the 'say' event
+// Hint: 'subscribe' is synonym for 'on'
+var receiver = evee.subscribe('say', e => console.log(e.data));
 
-// Dispatch the 'onSomething' event
-evee.dispatch('onSomething', 'Hello, world!');
+// Dispatch the 'say' event
+evee.dispatch('say', 'Hello, world!');
 
-// Unsubscribe from the 'onSomething' event
+// Unsubscribe from the 'say' event
 evee.unsubscribe(receiver);
 ```
 
@@ -49,19 +49,12 @@ Here's a nice pattern to write one-shot events:
 var Evee = require('evee'),
     evee = new Evee();
 
-// Subscribe to the 'oneShot' event
-evee.subscribe('oneShot', e => {
+// Subscribe to the 'say' event
+evee.once('say', e => console.log('hello, world'));
 
-    // Print hello, world
-    console.log('hello, world');
-
-    // Unsubscribe
-    evee.unsubscribe(e.sender);
-});
-
-// Dispatch the 'oneShot' event two times
-evee.dispatch('oneShot');
-evee.dispatch('oneShot');
+// Dispatch the 'say' event two times
+evee.dispatch('say');
+evee.dispatch('say');
 
 // hello, world is only printed once!
 ```

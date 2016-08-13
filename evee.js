@@ -1,6 +1,9 @@
 // evee.js - The lightweight es6 event library.
 var evee = () => {
+
+  // The event class
   class Eveent {
+
     /**
      * Construct a new Eveent object.
      * @param {object} name - The name of the event
@@ -13,7 +16,10 @@ var evee = () => {
       this.id = id;
     }
   }
+
+  // The event data class
   class EveentData {
+
     /**
      * Construct a new EveentData object.
      * @param {Eveent} sender - The event object
@@ -24,10 +30,12 @@ var evee = () => {
       this.data = data;
     }
   }
+
   // Prepare local globals
   var evee = {};
   var receivers = [];
   var gid = 0;
+
   /**
    * Subscribe to an event.
    * @param {object} name - The name of the event
@@ -42,6 +50,28 @@ var evee = () => {
     receivers.push(ev);
     return ev;
   }
+
+  /**
+   * Subscribe to an event.
+   * @param {object} name - The event name
+   * @param {function} action - The event action
+   */
+  var on = (name, action) => {
+    subscribe(name, action);
+  };
+
+  /**
+   * Subscribe to an event and fire only once.
+   * @param {object} name - The event name
+   * @param {function} action - The event action
+   */
+  var once = (name, action) => {
+    subscribe(name, e => {
+      unsubscribe(e.sender);
+      action(e);
+    });
+  }
+
   /**
    * Unsubscribe from an event.
    * @param {Eveent} event - The event
@@ -61,6 +91,7 @@ var evee = () => {
     });
     return result;
   }
+
   /**
    * Dispatch an event.
    * @param {string} name - The name of the event
@@ -71,30 +102,48 @@ var evee = () => {
       .filter(item => name === item.name)
       .forEach(item => item.action(new EveentData(item, e)));
   };
+
   /**
    * Clear all receivers.
    */
   var clear = () => receivers.length = 0;
-  // Make functions accessible
+
+  // Core functionality
   evee.subscribe = subscribe;
   evee.unsubscribe = unsubscribe;
   evee.dispatch = dispatch;
   evee.clear = clear;
+
+  // Additional functionality
+  evee.on = on;
+  evee.once = once;
+
   // Return evee object
   return evee;
 };
+
+// The evee class
 class Evee {
+
   /**
    * Construct a new Evee object.
    */
-  constructor() {
+  constructor(extensions) {
     ((evee) => {
       var evee = evee();
+
+      // Core functionality
       this.subscribe = evee.subscribe;
       this.unsubscribe = evee.unsubscribe;
       this.dispatch = evee.dispatch;
       this.clear = evee.clear;
+
+      // Additional functionality
+      this.on = evee.on;
+      this.once = evee.once;
     })(evee);
   }
 }
+
+// Export the evee class
 module.exports = Evee;
