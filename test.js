@@ -5,15 +5,9 @@ describe('evee', () => {
     it('should increment the id when subscribing', () => {
       ((evee) => {
         var evee = evee();
-        assert.equal(0, evee.subscribe('a', e => null));
-        assert.equal(1, evee.subscribe('b', e => null));
-        assert.equal(2, evee.subscribe('c', e => null));
-      })(evee);
-    });
-    it('should throw when the event name is not a string', () => {
-      ((evee) => {
-        var evee = evee();
-        assert.throws(() => evee.subscribe(0xFF, e => null));
+        assert.equal(0, evee.subscribe('a', _ => null).id);
+        assert.equal(1, evee.subscribe('b', _ => null).id);
+        assert.equal(2, evee.subscribe('c', _ => null).id);
       })(evee);
     });
     it('should throw when the action is not a function', () => {
@@ -23,24 +17,18 @@ describe('evee', () => {
       })(evee);
     });
   });
-  describe('#unsubscribe(id)', () => {
-    it('should return false when no subscriptions were removed', () => {
-      ((evee) => {
-        var evee = evee();
-        assert.equal(false, evee.unsubscribe(0));
-      })(evee);
-    });
+  describe('#unsubscribe(event)', () => {
     it('should return true when subscriptions were removed', () => {
       ((evee) => {
         var evee = evee();
-        var tid = evee.subscribe('a', e => null);
-        assert.equal(true, evee.unsubscribe(tid));
+        var ev = evee.subscribe('a', _ => null);
+        assert.equal(true, evee.unsubscribe(ev));
       })(evee);
     });
-    it('should throw when the id is not a number', () => {
+    it('should throw when the argument is not an event object', () => {
       ((evee) => {
         var evee = evee();
-        assert.throws(() => evee.unsubscribe(undefined));
+        assert.throws(() => evee.unsubscribe(0));
       })(evee);
     });
   });
@@ -49,7 +37,7 @@ describe('evee', () => {
       ((evee) => {
         var evee = evee();
         var res = false;
-        evee.subscribe('a', e => res = true);
+        evee.subscribe('a', _ => res = true);
         evee.dispatch('a');
         assert.equal(true, res);
       })(evee);
@@ -58,8 +46,8 @@ describe('evee', () => {
       ((evee) => {
         var evee = evee();
         var res = 0;
-        evee.subscribe('a', e => ++res);
-        evee.subscribe('a', e => ++res);
+        evee.subscribe('a', _ => ++res);
+        evee.subscribe('a', _ => ++res);
         evee.dispatch('a');
         assert.equal(2, res);
       })(evee);
@@ -68,31 +56,9 @@ describe('evee', () => {
       ((evee) => {
         var evee = evee();
         var res = false;
-        evee.subscribe('a', e => res = true);
+        evee.subscribe('a', _ => res = true);
         evee.dispatch('b');
         assert.equal(false, res);
-      })(evee);
-    });
-    it('should throw when the event name is not a string', () => {
-      ((evee) => {
-        var evee = evee();
-        assert.throws(() => evee.dispatch(undefined));
-      })(evee);
-    });
-  });
-  describe('#list()', () => {
-    it('should return an empty array when there are no receivers', () => {
-      ((evee) => {
-        var evee = evee();
-        assert.equal(0, evee.list().length);
-      })(evee);
-    });
-    it('should return the number of receivers', () => {
-      ((evee) => {
-        var evee = evee();
-        evee.subscribe('a', e => null);
-        evee.subscribe('b', e => null);
-        assert.equal(2, evee.list().length)
       })(evee);
     });
   });
@@ -100,9 +66,11 @@ describe('evee', () => {
     it('should clear the receiver list', () => {
       ((evee) => {
         var evee = evee();
-        evee.subscribe('a', e => null);
+        var res = false;
+        evee.subscribe('a', _ => res = true);
         evee.clear();
-        assert.equal(0, evee.list().length);
+        evee.dispatch('a');
+        assert.equal(false, res);
       })(evee);
     });
   });
