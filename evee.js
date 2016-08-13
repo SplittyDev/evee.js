@@ -106,14 +106,20 @@ var evee = () => {
 
   /**
    * Emit an event.
-   * @param {string|array} name - The name/s of the event
+   * @param {string|array|object} target - The target(s)
    * @param {object=} data - The event data
    */
-  var emit = (name, data) => {
-    if (name.constructor === Array) {
-      name.forEach(item => dispatch(item, data));
+  var emit = (target, data) => {
+    if (Array.isArray(target)) {
+      target.forEach(item => {
+        if (typeof(item) === 'object') {
+          dispatch(item.name, item.data);
+        } else {
+          dispatch(item, data);
+        }
+      });
     } else {
-      dispatch(name, data);
+      dispatch(target, data);
     }
   };
 
@@ -135,9 +141,7 @@ var evee = () => {
   evee.once = once;
   evee.emit = emit;
   evee.signal = signal;
-  evee.subscribe = subscribe;
   evee.unsubscribe = unsubscribe;
-  evee.dispatch = dispatch;
   evee.clear = clear;
 
   // Return evee object
@@ -157,9 +161,7 @@ class Evee {
       this.once = evee.once;
       this.emit = evee.emit;
       this.signal = evee.signal;
-      this.subscribe = evee.subscribe;
       this.unsubscribe = evee.unsubscribe;
-      this.dispatch = evee.dispatch;
       this.clear = evee.clear;
     })(evee);
   }

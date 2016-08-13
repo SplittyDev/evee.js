@@ -82,6 +82,16 @@ describe('evee', () => {
       assert.equal(true, resa);
       assert.equal(true, resb);
     });
+    it('should dispatch events with different data', () => {
+      var evee = new Evee();
+      var resa = false;
+      var resb = true;
+      evee.on('a', e => resa = e.data);
+      evee.on('b', e => resb = e.data);
+      evee.emit([{name: 'a', data: true}, {name: 'b', data: false}]);
+      assert.equal(true, resa);
+      assert.equal(false, resb);
+    });
   });
   describe('#signal(...names)', () => {
     it('should correctly dispatch multiple events', () => {
