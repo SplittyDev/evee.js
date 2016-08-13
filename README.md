@@ -18,7 +18,7 @@ var ticks = 0;
 while(true) {
 
   // Dispatch the 'update' event
-  evee.dispatch('update', ++ticks);
+  evee.emit('update', ++ticks);
 }
 ```
 
@@ -33,7 +33,7 @@ var Evee = require('evee'),
 var receiver = evee.on('say', e => console.log(e.data));
 
 // Dispatch the 'say' event
-evee.dispatch('say', 'Hello, world!');
+evee.emit('say', 'Hello, world!');
 
 // Unsubscribe from the 'say' event
 evee.unsubscribe(receiver);
@@ -49,8 +49,7 @@ var Evee = require('evee'),
 evee.once('say', e => console.log('hello, world'));
 
 // Dispatch the 'say' event two times
-evee.dispatch('say');
-evee.dispatch('say');
+evee.signal('say', 'say');
 
 // hello, world is only printed once!
 ```
