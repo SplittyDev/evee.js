@@ -1,5 +1,5 @@
 // evee.js - The lightweight es6 event library.
-var evee = () => {
+let evee = () => {
 
   // The event class
   class Eveent {
@@ -32,9 +32,9 @@ var evee = () => {
   }
 
   // Prepare local globals
-  var evee = {};
-  var receivers = [];
-  var gid = 0;
+  let gid = 0,
+      evee = {},
+      receivers = [];
 
   /**
    * Subscribe to an event.
@@ -42,16 +42,16 @@ var evee = () => {
    * @param {function} action - The event action
    * @returns {Eveent} - The event object
    */
-  var subscribe = (name, action) => {
+  let subscribe = (name, action) => {
     if (typeof(name) !== 'string') {
       throw new TypeError('name has to be of type string.');
     }
     if (typeof(action) !== 'function') {
       throw new TypeError('action has to be of type function.');
     }
-    var ev = new Eveent(name, action, gid++);
-    receivers.push(ev);
-    return ev;
+    let event = new Eveent(name, action, gid++);
+    receivers.push(event);
+    return event;
   }
 
   /**
@@ -59,15 +59,18 @@ var evee = () => {
    * @param {object} name - The event name
    * @param {function} action - The event action
    */
-  var on = (name, action) => subscribe(name, action);
+  let on = (name, action) => subscribe(name, action);
 
   /**
    * Subscribe to an event and fire only once.
    * @param {object} name - The event name
    * @param {function} action - The event action
    */
-  var once = (name, action) => {
-    subscribe(name, e => {
+  let once = (name, action) => {
+    if (typeof(action) !== 'function') {
+      throw new TypeError('action has to be of type function.');
+    }
+    return subscribe(name, e => {
       drop(e.sender);
       action(e);
     });
@@ -78,11 +81,11 @@ var evee = () => {
    * @param {Eveent} event - The event
    * @returns {boolean} - Whether the event has been dropped
    */
-  var drop = event => {
+  let drop = event => {
     if (!(event instanceof Eveent)) {
       throw new TypeError('event has to be an instance of Eveent.');
     }
-    var result = false;
+    let result = false;
     receivers.every((item, index, arr) => {
       if (event === item) {
         arr.splice(index, 1);
@@ -98,7 +101,10 @@ var evee = () => {
    * @param {string} name - The name of the event
    * @param {object=} data - The event data
    */
-  var dispatch = (name, data) => {
+  let dispatch = (name, data) => {
+    if (typeof(name) !== 'string') {
+      throw new TypeError('name has to be of type string.');
+    }
     receivers
       .filter(item => name === item.name)
       .forEach(item => item.action(new EveentData(item, data)));
@@ -109,7 +115,7 @@ var evee = () => {
    * @param {string|array|object} target - The target(s)
    * @param {object=} data - The event data
    */
-  var emit = (target, data) => {
+  let emit = (target, data) => {
     if (Array.isArray(target)) {
       target.forEach(item => {
         if (typeof(item) === 'object') {
@@ -127,14 +133,17 @@ var evee = () => {
    * Signal an event.
    * @param {array} args - The names of the events
    */
-  var signal = (...args) => {
+  let signal = (...args) => {
+    if (args.length === 0) {
+      throw new Error('signal called without arguments');
+    }
     args.forEach(item => dispatch(item));
   };
 
   /**
    * Clear all receivers.
    */
-  var clear = () => receivers.length = 0;
+  let clear = () => receivers.length = 0;
 
   // Make functions available
   evee.on = on;
@@ -154,16 +163,8 @@ class Evee {
   /**
    * Construct a new Evee object.
    */
-  constructor(extensions) {
-    ((evee) => {
-      var evee = evee();
-      this.on = evee.on;
-      this.once = evee.once;
-      this.drop = evee.drop;
-      this.emit = evee.emit;
-      this.signal = evee.signal;
-      this.clear = evee.clear;
-    })(evee);
+  constructor () {
+    return evee();
   }
 }
 

@@ -1,7 +1,7 @@
 {
   "name": "evee",
-  "version": "0.5.3",
-  "description": "A lightweight es6 event library.",
+  "version": "0.6.0",
+  "description": "The lightweight es6 event library.",
   "main": "evee.js",
   "scripts": {
     "test": "node_modules/.bin/mocha test.js",
