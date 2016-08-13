@@ -25,6 +25,13 @@ describe('evee', () => {
     });
   });
   describe('#dispatch(name, e)', () => {
+    it('should not dispatch when the event name matches no receivers', () => {
+      var evee = new Evee();
+      var res = false;
+      evee.subscribe('a', _ => res = true);
+      evee.dispatch('b');
+      assert.equal(false, res);
+    });
     it('should dispatch when the event name matches a receiver', () => {
       var evee = new Evee();
       var res = false;
@@ -40,12 +47,21 @@ describe('evee', () => {
       evee.dispatch('a');
       assert.equal(2, res);
     });
-    it('should not dispatch when the event name matches no receivers', () => {
+    it('should transmit the correct event data when dispatching', () => {
+      var evee = new Evee();
+      var res = 0;
+      evee.subscribe('a', e => res += e.data);
+      evee.subscribe('b', e => res += e.data);
+      evee.dispatch('a', 11);
+      evee.dispatch('b', 11);
+      assert.equal(22, res);
+    });
+    it('should transmit the correct sender when dispatching', () => {
       var evee = new Evee();
       var res = false;
-      evee.subscribe('a', _ => res = true);
-      evee.dispatch('b');
-      assert.equal(false, res);
+      var sender = evee.subscribe('a', e => res = e.sender === sender);
+      evee.dispatch('a');
+      assert.equal(true, res);
     });
   });
   describe('#clear()', () => {
