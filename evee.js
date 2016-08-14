@@ -63,24 +63,6 @@ let evee = () => {
   }
 
   /**
-   * Dispatch an event.
-   * @param {string} name - The name of the event
-   * @param {object=} data - The event data
-   */
-  let dispatch = (name, data) => {
-    if (typeof(name) !== 'string') {
-      throw new TypeError('name has to be of type string.');
-    }
-    receivers
-      .filter(item => name === item.name)
-      .forEach(item => item.action({
-        sender: item,
-        data: data,
-        hasData: () => data !== undefined
-      }));
-  };
-
-  /**
    * Emit an event.
    * @param {string|array|object} target - The target(s)
    * @param {object=} data - The event data
@@ -156,7 +138,9 @@ let evee = () => {
     if (args.length === 0) {
       throw new Error('signal called without arguments.');
     }
-    args.forEach(item => dispatch(item));
+    for (let i = 0; i < args.length; i++) {
+      emit(args[i]);
+    }
   };
 
   /**
