@@ -1,6 +1,6 @@
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?maxAge=0&style=flat-square)](https://raw.githubusercontent.com/SplittyDev/evee.js/master/LICENSE.md)
-[![npm](https://img.shields.io/npm/v/evee.svg?maxAge=0&style=flat-square)](https://www.npmjs.com/package/evee)
-[![Travis](https://img.shields.io/travis/SplittyDev/evee.js.svg?maxAge=0&style=flat-square)](https://travis-ci.org/SplittyDev/evee.js)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?maxAge=10&style=flat-square)](https://raw.githubusercontent.com/SplittyDev/evee.js/master/LICENSE.md)
+[![npm](https://img.shields.io/npm/v/evee.svg?maxAge=10&style=flat-square)](https://www.npmjs.com/package/evee)
+[![Travis](https://img.shields.io/travis/SplittyDev/evee.js.svg?maxAge=10&style=flat-square)](https://travis-ci.org/SplittyDev/evee.js)
 
 # evee.js
 The blazing fast es6 event library.
