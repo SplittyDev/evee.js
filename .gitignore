@@ -1,3 +1,6 @@
+# node
 node_modules
+# npm
 npm-debug.log
-evee.compatible.js
+# babel
+dist

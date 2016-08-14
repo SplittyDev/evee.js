@@ -2,11 +2,12 @@
   "name": "evee",
   "version": "0.8.0",
   "description": "The lightweight es6 event library.",
-  "main": "evee.js",
+  "main": "dist/evee.js",
   "scripts": {
     "test": "node_modules/.bin/mocha test.js",
     "bench": "node benchmark.js",
-    "build-es5": "node_modules/.bin/babel evee.js -o evee.compatible.js"
+    "compile": "node_modules/,bin/babel lib/ -d dist/",
+    "prepublish": "npm run-script compile"
   },
   "repository": {
     "type": "git",
