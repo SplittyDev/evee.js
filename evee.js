@@ -1,6 +1,5 @@
-// evee.js - The lightweight es6 event library.
+'use strict';
 let evee = () => {
-  'use strict';
 
   // The event class
   class Eveent {
