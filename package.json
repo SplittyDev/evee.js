@@ -7,7 +7,7 @@
     "test": "node_modules/.bin/mocha test.js",
     "test-dev": "npm run build && npm run test",
     "bench": "node benchmark.js",
-    "build": "node_modules/bin/babel lib/ -d dist/",
+    "build": "node_modules/.bin/babel lib/ -d dist/",
     "prepublish": "npm run-script test-dev"
   },
   "repository": {
