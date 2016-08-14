@@ -3,7 +3,4 @@ node_js:
   - "node"
   - "6"
 install: npm install --only=dev
-script:
-  - npm run build
-  - npm run test
-  - npm run bench
+script: npm run test-dev

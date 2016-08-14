@@ -1,6 +1,6 @@
 var Benchmark     = require ('benchmark'),
     EventEmitter  = require ('events'),
-    Evee          = require ('./evee'),
+    Evee          = require ('./lib/evee.js'),
     suite         = new Benchmark.Suite;
 
 suite.add('node#emit', () => {
