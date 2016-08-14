@@ -1,44 +1,6 @@
 'use strict';
 let evee = () => {
 
-  // The event class
-  class Eveent {
-
-    /**
-     * Construct a new Eveent object.
-     * @param {object} name - The name of the event
-     * @param {function} action - The event action
-     * @param {number} id - The event identifier
-     */
-    constructor(name, action, id) {
-      this.name = name;
-      this.action = action;
-      this.id = id;
-    }
-  }
-
-  // The event data class
-  class EveentData {
-
-    /**
-     * Construct a new EveentData object.
-     * @param {Eveent} sender - The event object
-     * @param {object} data - The event data
-     */
-    constructor(sender, data) {
-      this.sender = sender;
-      this.data = data;
-    }
-
-    /**
-     * Test if the event contains any data.
-     * @returns {bool} - Whether the event contains any data
-     */
-    hasData() {
-      return this.data !== undefined;
-    }
-  }
-
   // Prepare local globals
   let gid = 0,
       evee = {},
@@ -46,28 +8,24 @@ let evee = () => {
 
   /**
    * Subscribe to an event.
-   * @param {object} name - The name of the event
+   * @param {object} name - The event name
    * @param {function} action - The event action
-   * @returns {Eveent} - The event object
    */
-  let subscribe = (name, action) => {
+  let on = (name, action) => {
     if (typeof(name) !== 'string') {
       throw new TypeError('name has to be of type string.');
     }
     if (typeof(action) !== 'function') {
       throw new TypeError('action has to be of type function.');
     }
-    let event = new Eveent(name, action, gid++);
+    let event = {
+      name: name,
+      action: action,
+      id: gid++
+    };
     receivers.push(event);
     return event;
-  }
-
-  /**
-   * Subscribe to an event.
-   * @param {object} name - The event name
-   * @param {function} action - The event action
-   */
-  let on = (name, action) => subscribe(name, action);
+  };
 
   /**
    * Subscribe to an event and fire only once.
@@ -78,7 +36,7 @@ let evee = () => {
     if (typeof(action) !== 'function') {
       throw new TypeError('action has to be of type function.');
     }
-    return subscribe(name, e => {
+    return on(name, e => {
       drop(e.sender);
       action(e);
     });
@@ -90,8 +48,8 @@ let evee = () => {
    * @returns {boolean} - Whether the event has been dropped
    */
   let drop = event => {
-    if (!(event instanceof Eveent)) {
-      throw new TypeError('event has to be an instance of Eveent.');
+    if (event === undefined || event.name === undefined) {
+      throw new TypeError('attempt to drop undefined event.');
     }
     let result = false;
     receivers.every((item, index, arr) => {
@@ -115,7 +73,11 @@ let evee = () => {
     }
     receivers
       .filter(item => name === item.name)
-      .forEach(item => item.action(new EveentData(item, data)));
+      .forEach(item => item.action({
+        sender: item,
+        data: data,
+        hasData: () => data !== undefined
+      }));
   };
 
   /**
@@ -124,16 +86,46 @@ let evee = () => {
    * @param {object=} data - The event data
    */
   let emit = (target, data) => {
-    if (Array.isArray(target)) {
-      target.forEach(item => {
-        if (typeof(item) === 'object') {
-          dispatch(item.name, item.data);
-        } else {
-          dispatch(item, data);
+    if (target === undefined && data === undefined) {
+      throw new Error('emit called without arguments.');
+    }
+    if (!Array.isArray(target)) {
+      receivers.forEach(item => {
+        if (item.name === target) {
+          item.action({
+            sender: item,
+            data: data,
+            hasData: () => data !== undefined
+          });
         }
       });
-    } else {
-      dispatch(target, data);
+      return;
+    }
+    for (let i = 0; i < target.length; i++) {
+      let o = target[i];
+      let revlen = receivers.length;
+      if (typeof(o) === 'object') {
+        for (let i = 0; i < revlen; i++) {
+          let item = receivers[i];
+          if (item.name === o.name) {
+            item.action({
+              sender: item,
+              data: o.data,
+              hasData: () => o.data !== undefined
+            });
+          }
+        }
+      } else {
+        receivers.forEach(item => {
+          if (item.name !== o) {
+            item.action({
+              sender: item,
+              data: data,
+              hasData: () => data !== undefined
+            });
+          }
+        });
+      }
     }
   };
 
