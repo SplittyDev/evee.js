@@ -1,5 +1,6 @@
 // evee.js - The lightweight es6 event library.
 let evee = () => {
+  'use strict';
 
   // The event class
   class Eveent {
@@ -30,6 +31,10 @@ let evee = () => {
       this.data = data;
     }
 
+    /**
+     * Test if the event contains any data.
+     * @returns {bool} - Whether the event contains any data
+     */
     hasData() {
       return this.data !== undefined;
     }
