@@ -2,7 +2,7 @@
   "name": "evee",
   "version": "0.8.2",
   "description": "The lightweight es6 event library.",
-  "main": "lib/evee.js",
+  "main": "index.js",
   "scripts": {
     "test": "node_modules/.bin/mocha test.js",
     "test-dev": "npm run build && npm run test",
