@@ -31,7 +31,7 @@ function run_tests(Evee, name) {
       });
       it('should throw when called without arguments', () => {
         let evee = new Evee();
-        assert.throws(evee.on);
+        assert.throws(() => evee.on());
       });
     });
     describe('#once(name, action)', () => {
@@ -69,7 +69,7 @@ function run_tests(Evee, name) {
       });
       it('should throw when called without arguments', () => {
         let evee = new Evee();
-        assert.throws(evee.drop);
+        assert.throws(() => evee.drop());
       });
     });
     describe('#emit(name, data)', () => {
@@ -157,7 +157,7 @@ function run_tests(Evee, name) {
       });
       it('should throw when called without arguments', () => {
         let evee = new Evee();
-        assert.throws(evee.emit);
+        assert.throws(() => evee.emit());
       });
     });
     describe('#signal(...names)', () => {
@@ -180,7 +180,7 @@ function run_tests(Evee, name) {
       });
       it('should throw when called without arguments', () => {
         let evee = new Evee();
-        assert.throws (evee.signal);
+        assert.throws(() => evee.signal());
       });
     });
     describe('#times(name, n, callback)', () => {
@@ -228,7 +228,7 @@ function run_tests(Evee, name) {
       });
       it('should not throw when no subscriptions are active', () => {
         let evee = new Evee();
-        assert.doesNotThrow(evee.clear);
+        assert.doesNotThrow(() => evee.clear());
       });
     });
   });
