@@ -1,6 +1,6 @@
-var assert  = require('assert'),
-    EveeLib = require('./lib/evee.js'),
-    EveeDist= require('./dist/evee.js');
+var assert    = require('assert'),
+    EveeLib   = require('./lib/evee.js'),
+    EveeDist  = require('./dist/evee.js');
 
 run_tests(EveeLib, "evee-dev");
 run_tests(EveeDist, "evee-dist");
