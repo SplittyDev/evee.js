@@ -1,6 +1,3 @@
-// evee.js uses ECMAScript6 features
-// Please switch to Node 6 if the example does not work
-
 'use strict';
 var Evee = require('evee'),
     evee = new Evee();
