@@ -1,6 +1,6 @@
 {
   "name": "evee",
-  "version": "0.8.4",
+  "version": "0.8.5",
   "description": "The lightweight es6 event library.",
   "main": "index.js",
   "scripts": {
