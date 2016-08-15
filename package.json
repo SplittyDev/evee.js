@@ -10,6 +10,10 @@
     "build": "node_modules/.bin/babel lib/ -d dist/",
     "prepublish": "npm run-script test-dev"
   },
+  "files": [
+    "lib",
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SplittyDev/evee.js.git"
