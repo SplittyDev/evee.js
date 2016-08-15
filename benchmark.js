@@ -3,11 +3,11 @@ var Benchmark     = require ('benchmark'),
     Evee          = require ('./lib/evee.js'),
     suite         = new Benchmark.Suite;
 
-suite.add('node#emit', () => {
+suite.add('node -- on + emit --', () => {
   let emitter = new EventEmitter;
   emitter.on('event', () => undefined);
   emitter.emit('event');
-}).add('evee#emit', () => {
+}).add('evee -- on + emit --', () => {
   let evee = new Evee;
   evee.on('event', () => undefined);
   evee.emit('event');
