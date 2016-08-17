@@ -59,6 +59,8 @@ evee.times('say', 2);
 As you can see, evee is really easy to use!   
 Start using evee today and fire events at nearly the speed of light<sup>1</sup> :)
 
+<sup>1</sup> <sub>That's probably not true, but who knows.</sub>
+
 ## Performance
 Production version, EventEmitter vs evee.js, benchmarked using `benchmark`:
 ```js
@@ -82,4 +84,10 @@ node clear x 14,804,976 ops/sec ±7.71% (72 runs sampled)
 evee clear x 22,414,561 ops/sec ±6.55% (72 runs sampled)
 ```
 
-<sup>1</sup> <sub>This is probably not true, but who knows.</sub>
+The results may be different on your machine, so I suggest running the benchmarks yourself:
+```
+$ git clone git@github.com:SplittyDev/evee.js.git
+$ cd evee.js
+$ npm install --only=dev
+$ npm run-script bench-dev
+```
