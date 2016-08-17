@@ -1,14 +1,15 @@
 {
   "name": "evee",
-  "version": "0.8.6",
+  "version": "0.9.0",
   "description": "The lightweight es6 event library.",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha test.js",
-    "test-dev": "npm run build && npm run test",
-    "bench": "node benchmark.js",
     "build": "node_modules/.bin/babel lib/ -d dist/",
-    "prepublish": "npm run test-dev"
+    "test": "node_modules/.bin/mocha test.js",
+    "bench": "node benchmark.js",
+    "test-dev": "npm run build && npm run test",
+    "bench-dev": "npm run build && npm run bench",
+    "prepublish": "npm build"
   },
   "files": [
     "lib",

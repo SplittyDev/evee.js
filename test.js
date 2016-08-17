@@ -208,7 +208,7 @@ function run_tests(Evee, name) {
       it('should work correctly without a callback', () => {
         let evee = new Evee();
         let res = false;
-        evee.on('a', e => res = e.hasData() ? e.data : res);
+        evee.on('a', e => res = e.data || res);
         evee.times('a', 3);
         assert.equal(false, res);
       });
