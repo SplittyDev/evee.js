@@ -183,40 +183,6 @@ function run_tests(Evee, name) {
         assert.throws(() => evee.signal());
       });
     });
-    describe('#times(name, n, callback)', () => {
-      it('should do nothing if n has a value of 0', () => {
-        let evee = new Evee();
-        let res = 0;
-        evee.on('a', e => res = e.data);
-        evee.times('a', 0, i => i + 1);
-        assert.equal(0, res);
-      });
-      it('should keep track of the index', () => {
-        let evee = new Evee();
-        let res = 0;
-        evee.on('a', e => res = e.data);
-        evee.times('a', 10, i => i + 1);
-        assert.equal(10, res);
-      });
-      it('should accept parameterless callbacks', () => {
-        let evee = new Evee();
-        let res = false;
-        evee.on('a', e => res = e.data);
-        evee.times('a', 3, () => !res);
-        assert.equal(true, res);
-      });
-      it('should work correctly without a callback', () => {
-        let evee = new Evee();
-        let res = false;
-        evee.on('a', e => res = e.data || res);
-        evee.times('a', 3);
-        assert.equal(false, res);
-      });
-      it('should throw if n is not a number', () => {
-        let evee = new Evee();
-        assert.throws(() => evee.times('a', NaN, i => i));
-      });
-    });
     describe('#clear()', () => {
       it('should clear the receiver list', () => {
         let evee = new Evee();
