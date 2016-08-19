@@ -71,6 +71,17 @@ function run_tests(Evee, name) {
         let evee = new Evee();
         assert.throws(() => evee.drop());
       });
+      it('should remove the right event', () => {
+        let evee = new Evee();
+        let resa = false;
+        let resb = false;
+        let eva = evee.on('a', _ => resa = true);
+        let evb = evee.on('b', _ => resb = true);
+        evee.drop(evb);
+        evee.emit(['a', 'b']);
+        assert.equal(true, resa);
+        assert.equal(false, resb);
+      });
     });
     describe('#emit(name, data)', () => {
       it('should transmit the correct event data when dispatching', () => {
