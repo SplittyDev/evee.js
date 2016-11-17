@@ -1,6 +1,6 @@
 {
   "name": "evee",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "The lightweight es6 event library.",
   "main": "index.js",
   "scripts": {
@@ -40,5 +40,6 @@
     "benchmark": "^2.1.1",
     "mocha": "^3.0.2"
   },
-  "tonicExampleFilename": "examples/tonic.js"
+  "tonicExampleFilename": "examples/tonic.js",
+  "runkitExampleFilename": "examples/tonic.js"
 }
