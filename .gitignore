@@ -2,5 +2,6 @@
 node_modules
 # npm
 npm-debug.log
+npm-debug.log.*
 # babel
 dist
