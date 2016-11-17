@@ -5,7 +5,11 @@
 # evee.js
 The blazing fast es6 event library.
 
-Evee is a lightweight event library, written in clean ECMAScript6.
+Evee is a lightweight event library, written in clean ECMAScript6.   
+
+## Status
+The project is still actively maintained, but the functionality is complete.   
+Bugs will still be fixed and feature requests are more than welcome.
 
 ## How to use
 ```js
