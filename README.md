@@ -8,8 +8,12 @@ The blazing fast ES6 event library.
 Evee is a lightweight event library, written in clean ECMAScript6.   
 Evee exports both an ES5 and an ES6 version to support a wide range of clients.
 
+## Status
+The project is still actively maintained, but the functionality is complete.   
+Bugs will still be fixed and feature requests are more than welcome.
+
 ## How to upgrade from evee 1.x to evee 2.1.0+
-From version 2.0.0, evee exports two entry points: `evee` and `evee/es6`.   
+From version 2.1.0, evee exports two entry points: `evee` and `evee/es6`.   
 The `evee` export is what you're used to, and will work with all ES5 compatible targets.   
 The `evee/es6` export is the ES6 version of evee, which is generally faster.
 
@@ -25,10 +29,6 @@ const Evee = require('evee/es6'),
 import Evee from 'evee/es6';
 const  evee = new Evee;
 ```
-
-## Status
-The project is still actively maintained, but the functionality is complete.   
-Bugs will still be fixed and feature requests are more than welcome.
 
 ## How to use
 ```js
