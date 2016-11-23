@@ -1,10 +1,9 @@
 // Grab assert and the evee module
-var assert      = require('assert'),
-    evee_all    = require('./index.js');
+var assert      = require('assert');
 
 // Grab evee5 and evee6
-const EveeLib   = evee_all.Evee6,
-      EveeDist  = evee_all.Evee;
+const EveeLib   = require('./es6'),
+      EveeDist  = require('./');
 
 // Run tests with ES6 evee
 run_tests(EveeLib, "evee6");

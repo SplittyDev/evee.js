@@ -3,8 +3,8 @@ var Benchmark = require ('benchmark');
 
 // Grab Node, Evee5 and Evee6
 const Node  = require ('events'),
-      Evee  = require ('./index.js').Evee,
-      Evex  = require ('./index.js').Evee6,
+      Evee  = require ('./'),
+      Evex  = require ('./es6'),
       suite = new Benchmark.Suite;
 
 // Initialise globals

@@ -1,10 +1,10 @@
 {
   "name": "evee",
-  "version": "2.0.2",
-  "description": "The lightweight es6 event library.",
-  "main": "index.js",
+  "version": "2.1.0",
+  "description": "The lightweight ES6 event library.",
+  "main": "dist/evee.js",
   "scripts": {
-    "build": "node_modules/.bin/babel lib/ -d dist/",
+    "build": "cp lib/evee.js ./es6.js && node_modules/.bin/babel lib/ -d dist/",
     "test": "node_modules/.bin/mocha test.js",
     "bench": "node benchmark.js",
     "test-dev": "npm run-script build && npm run-script test",

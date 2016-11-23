@@ -3,5 +3,6 @@ node_modules
 # npm
 npm-debug.log
 npm-debug.log.*
-# babel
+# build
 dist
+es6.js
