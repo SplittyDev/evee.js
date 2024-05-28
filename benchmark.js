@@ -1,45 +1,33 @@
-// Grab Benchmark
-var Benchmark = require ('benchmark');
+import Benchmark from 'benchmark'
+import { default as Node } from 'events'
+import Evee from './dist/esm/index.js'
 
-// Grab Node, Evee5 and Evee6
-const Node  = require ('events'),
-      Evee  = require ('./'),
-      Evex  = require ('./es6'),
-      suite = new Benchmark.Suite;
+const suite = new Benchmark.Suite()
 
 // Initialise globals
-var node = new Node;
-var evee = new Evee;
-var evex = new Evex;
+var node = new Node();
+var evee = new Evee();
 
-suite.add('node  new', () => {
-  var _ = new Node;
-}).add('evee5 new', () => {
-  var _ = new Evee;
-}).add('evee6 new', () => {
-  var _ = new Evex;
-}).add('node  clear', () => {
+node.setMaxListeners(99999999);
+
+suite.add('node new', () => {
+  var _ = new Node();
+}).add('evee new', () => {
+  var _ = new Evee();
+}).add('node clear', () => {
   node.removeAllListeners();
-}).add('evee5 clear', () => {
+}).add('evee clear', () => {
   evee.clear();
-}).add('evee6 clear', () => {
-  evex.clear();
-}).add('node  on', () => {
+}).add('node on', () => {
   node.on('event', () => undefined);
-}).add('evee5 on', () => {
+}).add('evee on', () => {
   evee.on('event', () => undefined);
-}).add('evee6 on', () => {
-  evex.on('event', () => undefined);
-}).add('node  emit', () => {
+}).add('node emit', () => {
   node.emit('event');
-}).add('evee5 emit', () => {
+}).add('evee emit', () => {
   evee.emit('event');
-}).add('evee6 emit', () => {
-  evex.emit('event');
 }).on('cycle', event => {
-  node = new Node;
-  node.setMaxListeners(99999999);
-  evee = new Evee;
-  evex = new Evex;
+  node.removeAllListeners();
+  evee.clear();
   console.log(String(event.target));
-}).run({ 'async': false });
+}).run({ 'async': true });
