@@ -7,7 +7,13 @@ The blazing fast event library 🔥
 Evee is a lightweight event library, written in just ~200 lines of JavaScript.  
 Evee exports ESM, CommonJS and Browser globals, so you can use it in any environment.
 
-## Upgrading to Evee 3
+## How to install
+```sh
+npm install evee # if you're using NPM
+yarn add evee # if you're using Yarn
+```
+
+## Introducing Evee 3
 Evee now natively supports ESM and CommonJS.
 
 We export two things:
@@ -24,11 +30,11 @@ If you're planning to use Evee in the browser, you can now import it like this:
 ```html
 <!-- ESM if you're targeting modern browsers -->
 <script type="module">
-  import Evee, { evee } from 'https://cdn.jsdelivr.net/npm/evee';
+  import Evee, { evee } from 'https://cdn.jsdelivr.net/npm/evee@3';
 </script>
 
 <!-- Global export if you're targeting older browsers -->
-<script src="https://cdn.jsdelivr.net/npm/evee/dist/browser/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/evee@3/dist/browser/index.min.js"></script>
 <script>
   // You can use the `Evee` (class) and `evee` (instance) globals here
 </script>

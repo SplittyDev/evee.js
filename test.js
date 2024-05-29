@@ -1,13 +1,15 @@
 // Grab assert and the evee module
 import assert from 'assert'
 import Evee, { evee } from './dist/esm/index.js'
+import EveeMin, { evee as eveeMin } from './dist/esm/index.min.js'
 
 // Run tests with evee
 run_tests(() => new Evee(), "evee (node, new instance)");
-run_tests(() => {
-  evee.clear();
-  return evee
-}, "evee (node, shared instance)");
+run_tests(() => {evee.clear(); return evee}, "evee (node, shared instance)");
+
+// Run tests with minified evee
+run_tests(() => new EveeMin(), "evee (node, minified, new instance)");
+run_tests(() => {eveeMin.clear(); return eveeMin}, "evee (node, minified, shared instance)");
 
 function run_tests(makeInstance, name) {
   describe(name, () => {

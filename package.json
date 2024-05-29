@@ -1,14 +1,14 @@
 {
   "name": "evee",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "The lightweight ES6 event library.",
   "main": "dist/esm/index.js",
   "type": "module",
   "scripts": {
     "build": "npm run build:esm && npm run build:cjs && npm run build:browser",
-    "build:esm": "npx babel lib/evee.js --out-file dist/esm/index.js --env-name=esm",
-    "build:cjs": "npx babel lib/evee.js --out-file dist/cjs/index.js --env-name=cjs",
-    "build:browser": "npx babel lib/evee.js --out-file dist/browser/index.js --env-name=browser",
+    "build:esm": "npx babel lib/evee.js --out-file dist/esm/index.js --env-name=esm && npx terser dist/esm/index.js --compress --source-map \"url='index.min.js.map'\" --module -o dist/esm/index.min.js",
+    "build:cjs": "npx babel lib/evee.js --out-file dist/cjs/index.js --env-name=cjs && npx terser dist/cjs/index.js --compress --source-map \"url='index.min.js.map'\" -o dist/cjs/index.min.js",
+    "build:browser": "npx babel lib/evee.js --out-file dist/browser/index.js --env-name=browser && npx terser dist/browser/index.js --compress --source-map \"url='index.min.js.map'\" -o dist/browser/index.min.js",
     "test": "npx mocha test.js",
     "bench": "node benchmark.js",
     "test-dev": "npm run build && npm run test",
@@ -48,6 +48,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.24.6",
     "@babel/preset-env": "^7.24.6",
     "benchmark": "^2.1.4",
-    "mocha": "^10.4.0"
+    "mocha": "^10.4.0",
+    "terser": "^5.31.0"
   }
 }
