@@ -8,34 +8,35 @@ Evee is a lightweight event library, written in clean JavaScript.
 Evee exports ESM, CommonJS and Browser globals, so you can use it in any environment.
 
 ## Upgrading to Evee 3
-Evee now natively supports ESM and CommonJS, so you can import it in any environment.
+Evee now natively supports ESM and CommonJS.
+
+We export two things:
+- `Evee` (default export): The class you can use to create new instances of Evee.
+- `evee` (named export): A pre-made instance of Evee so you can immediately start using it.
 
 If you're planning to use Evee in NodeJS, you can now import it like this:
 ```js
-import Evee from 'evee'; // If you're using ESM (import/export)
-const Evee = require('evee').default; // If you're using CommonJS (require)
+import Evee, { evee } from 'evee'; // If you're using ESM (import/export)
+const { default: Evee, evee } = require('evee'); // If you're using CommonJS (require)
 ```
 
 If you're planning to use Evee in the browser, you can now import it like this:
 ```html
 <!-- ESM if you're targeting modern browsers -->
 <script type="module">
-  import Evee from 'https://cdn.jsdelivr.net/npm/evee';
-  const evee = new Evee();
+  import Evee, { evee } from 'https://cdn.jsdelivr.net/npm/evee';
 </script>
 
 <!-- Global export if you're targeting older browsers -->
 <script src="https://cdn.jsdelivr.net/npm/evee/dist/browser/index.js"></script>
 <script>
-  const evee = new Evee(); // `Evee` is defined globally
+  // You can use the `Evee` (class) and `evee` (instance) globals here
 </script>
 ```
 
 ## How to use
 ```js
-import Evee from 'evee'
-
-const evee = new Evee()
+import { evee } from 'evee'
 
 // Subscribe to the 'update' event
 evee.on('update', e => console.log(`Received event #${e.data}`))
@@ -50,9 +51,7 @@ for (let i = 0; i < 100; i++) {
 You can also keep track of your event listeners unsubscribe from events you don't need anymore.
 
 ```js
-import Evee from 'evee'
-
-const evee = new Evee()
+import { evee } from 'evee'
 
 // Subscribe to the 'say' event
 var receiver = evee.on('say', e => console.log(e.data));
@@ -68,9 +67,7 @@ If you want to fire an event only once, you can do that too!
 The event will be automatically removed after the first usage:
 
 ```js
-import Evee from 'evee'
-
-const evee = new Evee()
+import { evee } from 'evee'
 
 // Subscribe to the 'say' event
 evee.once('say', e => console.log('hello, world'));
