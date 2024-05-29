@@ -11,9 +11,9 @@
     "build:browser": "npx babel lib/evee.js --out-file dist/browser/index.js --env-name=browser",
     "test": "npx mocha test.js",
     "bench": "node benchmark.js",
-    "test-dev": "npm run-script build && npm run-script test",
-    "bench-dev": "npm run-script build && npm run-script bench",
-    "prepublish": "npm run-script build"
+    "test-dev": "npm run build && npm run test",
+    "bench-dev": "npm run build && npm run bench",
+    "prepublish": "npm run build"
   },
   "exports": {
     "import": "./dist/esm/index.js",
@@ -22,8 +22,8 @@
   "files": [
     "lib",
     "dist",
-    "index.js",
-    "examples/tonic.js"
+    "README.md",
+    "LICENSE.md"
   ],
   "repository": {
     "type": "git",
@@ -36,12 +36,12 @@
     "subscribe",
     "async"
   ],
-  "author": "SplittyDev",
+  "author": "Marco Quinten <splittydev@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/SplittyDev/evee.js/issues"
   },
-  "homepage": "https://github.com/SplittyDev/evee.js#readme",
+  "homepage": "https://github.com/SplittyDev/evee.js",
   "devDependencies": {
     "@babel/cli": "^7.24.6",
     "@babel/core": "^7.24.6",
