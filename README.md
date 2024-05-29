@@ -1,10 +1,10 @@
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?maxAge=10&style=flat-square)](https://raw.githubusercontent.com/SplittyDev/evee.js/master/LICENSE.md)
-[![npm](https://img.shields.io/npm/v/evee.svg?maxAge=10&style=flat-square)](https://www.npmjs.com/package/evee)
+[![MIT License](https://badgers.space/github/license/SplittyDev/evee.js)](./LICENSE.md)
+[![Evee on NPM](https://badgers.space/npm/name/evee)](https://npmjs.com/package/evee)
 
 # evee.js
-The blazing fast event library.
+The blazing fast event library 🔥
 
-Evee is a lightweight event library, written in clean JavaScript.   
+Evee is a lightweight event library, written in just ~200 lines of JavaScript.  
 Evee exports ESM, CommonJS and Browser globals, so you can use it in any environment.
 
 ## Upgrading to Evee 3
