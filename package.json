@@ -1,21 +1,29 @@
 {
   "name": "evee",
-  "version": "2.1.0",
+  "version": "3.0.0-pre.0",
   "description": "The lightweight ES6 event library.",
-  "main": "dist/evee.js",
+  "main": "dist/esm/index.js",
+  "type": "module",
   "scripts": {
-    "build": "cp lib/evee.js ./es6.js && node_modules/.bin/babel lib/ -d dist/",
-    "test": "node_modules/.bin/mocha test.js",
+    "build": "npm run build:esm && npm run build:cjs && npm run build:browser",
+    "build:esm": "npx babel lib/evee.js --out-file dist/esm/index.js --env-name=esm",
+    "build:cjs": "npx babel lib/evee.js --out-file dist/cjs/index.js --env-name=cjs",
+    "build:browser": "npx babel lib/evee.js --out-file dist/browser/index.js --env-name=browser",
+    "test": "npx mocha test.js",
     "bench": "node benchmark.js",
-    "test-dev": "npm run-script build && npm run-script test",
-    "bench-dev": "npm run-script build && npm run-script bench",
-    "prepublish": "npm run-script build"
+    "test-dev": "npm run build && npm run test",
+    "bench-dev": "npm run build && npm run bench",
+    "prepublish": "npm run build"
+  },
+  "exports": {
+    "import": "./dist/esm/index.js",
+    "require": "./dist/cjs/index.js"
   },
   "files": [
     "lib",
     "dist",
-    "index.js",
-    "examples/tonic.js"
+    "README.md",
+    "LICENSE.md"
   ],
   "repository": {
     "type": "git",
@@ -28,18 +36,18 @@
     "subscribe",
     "async"
   ],
-  "author": "SplittyDev",
+  "author": "Marco Quinten <splittydev@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/SplittyDev/evee.js/issues"
   },
-  "homepage": "https://github.com/SplittyDev/evee.js#readme",
+  "homepage": "https://github.com/SplittyDev/evee.js",
   "devDependencies": {
-    "babel-cli": "^6.11.4",
-    "babel-preset-es2015": "^6.13.2",
-    "benchmark": "^2.1.1",
-    "mocha": "^3.0.2"
-  },
-  "tonicExampleFilename": "examples/tonic.js",
-  "runkitExampleFilename": "examples/tonic.js"
+    "@babel/cli": "^7.24.6",
+    "@babel/core": "^7.24.6",
+    "@babel/plugin-transform-modules-commonjs": "^7.24.6",
+    "@babel/preset-env": "^7.24.6",
+    "benchmark": "^2.1.4",
+    "mocha": "^10.4.0"
+  }
 }

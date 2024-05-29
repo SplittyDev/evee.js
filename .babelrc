@@ -1,5 +1,42 @@
 {
-  "presets": [
-    ["es2015", { "modules": false }]
-  ]
+  "env": {
+    "browser": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "browsers": "last 2 versions"
+            }
+          }
+        ]
+      ]
+    },
+    "cjs": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "node": "current"
+            },
+            "modules": "commonjs"
+          }
+        ]
+      ]
+    },
+    "esm": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "node": "current"
+            },
+            "modules": false
+          }
+        ]
+      ]
+    }
+  }
 }
