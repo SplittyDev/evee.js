@@ -1,6 +1,6 @@
 {
   "name": "evee",
-  "version": "3.0.0",
+  "version": "3.0.0-pre.0",
   "description": "The lightweight ES6 event library.",
   "main": "dist/esm/index.js",
   "type": "module",
@@ -49,7 +49,5 @@
     "@babel/preset-env": "^7.24.6",
     "benchmark": "^2.1.4",
     "mocha": "^10.4.0"
-  },
-  "tonicExampleFilename": "examples/tonic.js",
-  "runkitExampleFilename": "examples/tonic.js"
+  }
 }
