@@ -1,6 +1,6 @@
 {
   "name": "evee",
-  "version": "3.0.0-pre.0",
+  "version": "3.0.0",
   "description": "The lightweight ES6 event library.",
   "main": "dist/esm/index.js",
   "type": "module",
